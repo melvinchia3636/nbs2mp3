@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+  <script src="./data.js"></script>
+  <script>
+    function numberToNoteName(num) {
+      const noteNames = [
+        "A",
+        "A#",
+        "B",
+        "C",
+        "C#",
+        "D",
+        "D#",
+        "E",
+        "F",
+        "F#",
+        "G",
+        "G#",
+      ];
+      const octave = Math.floor(num / 12) - 1;
+      const note = num % 12;
+      return noteNames[note] + octave;
+    }
+    const colors = [
+      "bg-blue-500",
+      "bg-green-500",
+      "bg-pink-300",
+      "bg-yellow-500",
+      "bg-violet-500",
+      "bg-orange-800",
+      "bg-yellow-200",
+      "bg-fuchsia-500",
+      "bg-sky-500",
+      "bg-zinc-200",
+      "bg-blue-500",
+      "bg-red-500",
+      "bg-orange-500",
+      "bg-lime-500",
+      "bg-pink-500",
+      "bg-gray-500",
+    ];
+    const thead = document.querySelector("thead > tr");
+    const tbody = document.querySelector("tbody");
+    for (
+      let i = 0;
+      i <
+      Math.max(
+        ...Object.values(data).map((e) =>
+          parseInt(Object.keys(e)[Object.keys(e).length - 1])
+        )
+      );
+      i++
+    ) {
+      const th = document.createElement("th");
+      th.classList.add("text-center");
+      th.textContent = i;
+      thead.appendChild(th);
+    }
+    for (let [key, value] of Object.entries(data)) {
+      const tr = document.createElement("tr");
+
+      const keys = Object.keys(value);
+
+      for (let i = 0; i < keys[keys.length - 1]; i++) {
+        const td = document.createElement("td");
+        if (i % 4) td.classList.add("border-l");
+        else td.classList.add("border-l-2");
+        td.classList.add("border-zinc-200");
+        const div = document.createElement("div");
+        div.classList.add("w-12");
+        div.classList.add("h-12");
+
+        if (keys.includes(i + "")) {
+          div.textContent = numberToNoteName(value[i][1]);
+          div.classList.add(colors[value[i][0]]);
+          div.classList.add("text-white");
+
+          div.classList.add("flex");
+          div.classList.add("justify-center");
+          div.classList.add("items-center");
+        }
+        td.appendChild(div);
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+  </script>
+</html>
